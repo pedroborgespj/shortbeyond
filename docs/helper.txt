@@ -1,0 +1,20 @@
+# Criar pod
+podman play kube shortbeyond.yaml
+
+# Listar pods
+podman pod ps
+
+# Inspecionar pod
+podman pod inspect nome_do_pod
+
+# Parar pod
+podman pod stop nome_do_pod
+
+# Iniciar pod
+podman pod start nome_do_pod
+
+# Remover pod
+podman pod rm -f nome_do_pod
+
+# Listar contêineres dentro dos pods
+podman ps --pod
