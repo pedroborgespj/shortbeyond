@@ -2,15 +2,21 @@ import { expect, test } from '@playwright/test'
 
 import { getUser } from '../../support/factories/user'
 
+import { registerService } from '../../support/services/register'
+
 test.describe('POST /auth/register', () => {
+
+    let register
+
+    test.beforeEach(({request}) => {
+        register = registerService(request)
+    })
 
     test('deve cadastrar um novo usuário', async ({ request }) => {
 
         const user = getUser()
 
-        const response = await request.post('http://localhost:3333/api/auth/register', {
-            data: user
-        })
+        const response = await register.createUser(user)
 
         expect(response.status()).toBe(201)
 
@@ -28,15 +34,11 @@ test.describe('POST /auth/register', () => {
 
         const user = getUser()
 
-        const preCondition = await request.post('http://localhost:3333/api/auth/register', {
-            data: user
-        })
+        const preCondition = await register.createUser(user)
 
         expect(preCondition.status()).toBe(201)
 
-        const response = await request.post('http://localhost:3333/api/auth/register', {
-            data: user
-        })
+        const response = await register.createUser(user)
 
         expect(response.status()).toBe(400)
 
@@ -54,9 +56,7 @@ test.describe('POST /auth/register', () => {
             password: 'pwd123'
         }
 
-        const response = await request.post('http://localhost:3333/api/auth/register', {
-            data: user
-        })
+        const response = await register.createUser(user)
 
         expect(response.status()).toBe(400)
 
@@ -73,9 +73,7 @@ test.describe('POST /auth/register', () => {
             password: 'pwd123'
         }
 
-        const response = await request.post('http://localhost:3333/api/auth/register', {
-            data: user
-        })
+        const response = await register.createUser(user)
 
         expect(response.status()).toBe(400)
 
@@ -92,9 +90,7 @@ test.describe('POST /auth/register', () => {
             password: 'pwd123'
         }
 
-        const response = await request.post('http://localhost:3333/api/auth/register', {
-            data: user
-        })
+        const response = await register.createUser(user)
 
         expect(response.status()).toBe(400)
 
@@ -111,9 +107,7 @@ test.describe('POST /auth/register', () => {
             email: 'pedro@dev.com'
         }
 
-        const response = await request.post('http://localhost:3333/api/auth/register', {
-            data: user
-        })
+        const response = await register.createUser(user)
 
         expect(response.status()).toBe(400)
 
