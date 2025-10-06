@@ -15,11 +15,18 @@ export const authService = (request) => {
                 password: user.password
             }
         })
-    }    
+    }
+    
+    const getToken = async (user) => {
+        const response = await login(user)
+        const body = await response.json()
+        return body.data.token
+    }
 
     return {
         createUser,
-        login
+        login,
+        getToken
     }
 
 }
