@@ -1,18 +1,10 @@
-import { expect, test } from '@playwright/test'
+import { test, expect } from '../../support/fixtures'
 
 import { getUser } from '../../support/factories/user'
 
-import { authService } from '../../support/services/auth'
-
 test.describe('POST /auth/register', () => {
 
-    let auth
-
-    test.beforeEach(({request}) => {
-        auth = authService(request)
-    })
-
-    test('deve cadastrar um novo usuário', async ({ request }) => {
+    test('deve cadastrar um novo usuário', async ({ auth }) => {
 
         const user = getUser()
 
@@ -30,7 +22,7 @@ test.describe('POST /auth/register', () => {
 
     })
 
-    test('não deve cadastrar quando o enail já estiver em uso', async ({ request }) => {
+    test('não deve cadastrar quando o enail já estiver em uso', async ({ auth }) => {
 
         const user = getUser()
 
@@ -48,7 +40,7 @@ test.describe('POST /auth/register', () => {
 
     })
 
-    test('não deve cadastrar quando o enail é incorreto', async ({ request }) => {
+    test('não deve cadastrar quando o enail é incorreto', async ({ auth }) => {
 
         const user = {
             name: `Pedro`,
@@ -66,7 +58,7 @@ test.describe('POST /auth/register', () => {
 
     })
 
-    test('não deve cadastrar quando o nome não é informado', async ({ request }) => {
+    test('não deve cadastrar quando o nome não é informado', async ({ auth }) => {
 
         const user = {
             email: 'pedro@dev.com',
@@ -83,7 +75,7 @@ test.describe('POST /auth/register', () => {
 
     })
 
-    test('não deve cadastrar quando o enail não é informado', async ({ request }) => {
+    test('não deve cadastrar quando o enail não é informado', async ({ auth }) => {
 
         const user = {
             name: `Pedro`,
@@ -100,7 +92,7 @@ test.describe('POST /auth/register', () => {
 
     })
 
-    test('não deve cadastrar quando o password não é informado', async ({ request }) => {
+    test('não deve cadastrar quando o password não é informado', async ({ auth }) => {
 
         const user = {
             name: `Pedro`,

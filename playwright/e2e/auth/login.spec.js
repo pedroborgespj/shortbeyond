@@ -1,18 +1,10 @@
-import { expect, test } from '@playwright/test'
+import { test, expect } from '../../support/fixtures'
 
 import { getUser } from '../../support/factories/user'
 
-import { authService } from '../../support/services/auth'
-
 test.describe('POST /auth/login', () => {
 
-    let auth
-
-    test.beforeEach(({request})=> {
-        auth = authService(request)
-    })
-
-    test('deve fazer login com sucesso', async ()=> {
+    test('deve fazer login com sucesso', async ({ auth }) => {
 
         const user = getUser()
 
@@ -32,14 +24,14 @@ test.describe('POST /auth/login', () => {
 
     })
 
-    test('não deve logar com senha incorreta', async ()=> {
+    test('não deve logar com senha incorreta', async ({ auth }) => {
 
         const user = getUser()
 
         const preCondition = await auth.createUser(user)
         expect(preCondition.status()).toBe(201)
 
-        const response = await auth.login({...user, password: '123456'})
+        const response = await auth.login({ ...user, password: '123456' })
         expect(response.status()).toBe(401)
 
         const body = await response.json()
@@ -47,7 +39,7 @@ test.describe('POST /auth/login', () => {
 
     })
 
-    test('não deve logar com email que não foi cadastrado', async ()=> {
+    test('não deve logar com email que não foi cadastrado', async ({ auth }) => {
 
         const user = {
             email: '404@dev.com',
@@ -62,7 +54,7 @@ test.describe('POST /auth/login', () => {
 
     })
 
-    test('não deve logar quando o email não é informado', async ()=> {
+    test('não deve logar quando o email não é informado', async ({ auth }) => {
 
         const user = {
             password: 'pwd123'
@@ -76,7 +68,7 @@ test.describe('POST /auth/login', () => {
 
     })
 
-    test('não deve logar quando o password não é informado', async ()=> {
+    test('não deve logar quando o password não é informado', async ({ auth }) => {
 
         const user = {
             email: 'pedro@dev.com'
