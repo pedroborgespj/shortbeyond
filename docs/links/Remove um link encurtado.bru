@@ -1,0 +1,26 @@
+meta {
+  name: Remove um link encurtado
+  type: http
+  seq: 3
+}
+
+delete {
+  url: http://localhost:3333/api/links/{id}
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMDFLNkMxRDk5MVRRSkRXUTk0TVFKS1M2NzAiLCJleHAiOjE3NjA1NTg5OTcsImlhdCI6MTc2MDQ3MjU5N30.rUeKSJC2nXp45m19n9ctMopaxS3-h2xkjPBWsy0nmrU
+}
+
+body:json {
+  {
+    "original_url": "https://www.linkedin.com/in/pedro-borges-peres-junior-/",
+    "title": "Meu LinkedIn"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

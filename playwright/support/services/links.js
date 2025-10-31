@@ -12,8 +12,18 @@ export const linksService = (request) => {
         })
     }
 
+    const getLinks = async (token) => {
+
+        return await request.get('http://localhost:3333/api/links', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    }
+
     return {
-        createLink
+        createLink,
+        getLinks
     }
 
 }
