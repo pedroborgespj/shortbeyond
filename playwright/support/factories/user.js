@@ -7,7 +7,7 @@ export const getUser = () => {
 
     return {
         name: `${firstName} ${lastName}`,
-        email: faker.internet.email({ firstName, lastName }).toLowerCase(),
+        email: faker.internet.email({ firstName, lastName, provider:'pedro.dev' }).toLowerCase(),
         password: 'pwd123'
     }
 }
@@ -18,7 +18,7 @@ export const getUserWithLink = () => {
 
     return {
         name: `${firstName} ${lastName}`,
-        email: faker.internet.email({ firstName, lastName }).toLowerCase(),
+        email: faker.internet.email({ firstName, lastName, provider:'pedro.dev' }).toLowerCase(),
         password: 'pwd123',
         link: {
             original_url: faker.internet.url(),
@@ -33,7 +33,7 @@ export const getUserWithLinks = (linksCount = 1) => {
 
     return {
         name: `${firstName} ${lastName}`,
-        email: faker.internet.email({ firstName, lastName }).toLowerCase(),
+        email: faker.internet.email({ firstName, lastName, provider:'pedro.dev' }).toLowerCase(),
         password: 'pwd123',
         links: faker.helpers.multiple(()=> ({
             original_url: faker.internet.url(),
